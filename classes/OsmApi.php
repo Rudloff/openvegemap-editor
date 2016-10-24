@@ -79,7 +79,7 @@ class OsmApi
         $node = $xml->query($type);
 
         return new Feature(
-            new Point([(int) $node[0]->getAttribute('lon'), (int) $node[0]->getAttribute('lat')]),
+            new Point([(float) $node[0]->getAttribute('lon'), (float) $node[0]->getAttribute('lat')]),
             $tags,
             $node[0]->getAttribute('id')
         );
