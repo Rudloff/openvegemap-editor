@@ -2,7 +2,7 @@
 <h2 class="h3">Import from OpenStreetMap</h2>
 <form class="py1">
     <label for="query">Address or name</label>
-    <input type="search" name="query" id="query" value="{if $query}{$query}{/if}" />
+    <input type="text" name="query" id="query" value="{if $query}{$query}{/if}" />
     <input type="submit" value="Search" />
 </form>
 <ul>
