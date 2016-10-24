@@ -1,0 +1,9 @@
+vendor/
+node_modules/
+bower_components/
+templates_c/
+config.php
+coverage/
+clover.xml
+config_test.php
+docs/

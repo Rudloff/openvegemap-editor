@@ -1,0 +1,15 @@
+AddOutputFilterByType DEFLATE text/css text/html application/javascript font/truetype application/json application/font-woff
+
+<ifmodule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType image/png "access plus 1 week"
+    ExpiresByType image/jpeg "access plus 1 week"
+    ExpiresByType image/svg+xml "access plus 1 week"
+    ExpiresByType font/truetype "access plus 1 week"
+</ifmodule>
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
