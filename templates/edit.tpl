@@ -10,7 +10,7 @@
     {/if}
 </table>
 <div class="my1">
-    <a target="_blank" class="btn--blue" href="../#zoom=18&amp;lat={$coords.1}&amp;lon={$coords.0}">Display on map</a>
+    <a target="_blank" class="btn--blue" href="https://openvegemap.netlib.re/#zoom=18&amp;lat={$coords.1}&amp;lon={$coords.0}">Display on map</a>
     <a target="_blank" class="btn--blue" href="http://www.openstreetmap.org/{$type}/{$id}">Open on OSM</a>
 </div>
 <form class="py1" method="post">
