@@ -7,20 +7,12 @@ namespace OpenVegeMap\Editor;
 use FluidXml\FluidXml;
 use GeoJson\Feature\Feature;
 use GeoJson\Geometry\Point;
-use KageNoNeko\OSM\OverpassConnection;
 
 /**
  * Manage calls to the various OpenStreetMap APIs.
  */
 class OsmApi
 {
-    /**
-     * Overpass API connection.
-     *
-     * @var OverpassConnection
-     */
-    private $osm;
-
     /**
      * Guzzle HTTP client.
      *
