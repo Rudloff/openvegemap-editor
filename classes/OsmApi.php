@@ -55,9 +55,13 @@ class OsmApi
      */
     public function getById($type, $id)
     {
+        $suffix = '';
+        if ($type == 'way') {
+            $suffix = '/full';
+        }
         $result = $this->client->request(
             'GET',
-            $this->apiUrl.$type.'/'.$id,
+            $this->apiUrl.$type.'/'.$id.$suffix,
             [
                 'auth' => [OSM_USER, OSM_PASS],
             ]
@@ -69,9 +73,19 @@ class OsmApi
             $tags[$tag->getAttribute('k')] = $tag->getAttribute('v');
         }
         $node = $xml->query($type);
+        if ($type == 'way') {
+            $subnodes = [];
+            foreach ($xml->query('node') as $subnode) {
+                $subnodes[] = new Point([(float) $subnode->getAttribute('lon'), (float) $subnode->getAttribute('lat')]);
+            }
+            $way = new MultiPoint($subnodes);
+            $coords = $way->getCenter();
+        } else {
+            $coords = new Point([(float) $node[0]->getAttribute('lon'), (float) $node[0]->getAttribute('lat')]);
+        }
 
         return new Feature(
-            new Point([(float) $node[0]->getAttribute('lon'), (float) $node[0]->getAttribute('lat')]),
+            $coords,
             $tags,
             $node[0]->getAttribute('id')
         );
