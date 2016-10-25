@@ -27,6 +27,7 @@
             </div>
         {/foreach}
     </div>
+    <p><b>If in doubt</b>: only places that provide a proper choice for an option should be tagged <i>yes</i>. For instance, a restaurant with vegetarian starters but no vegetarian main course is to be tagged <i>no</i>. Same for, a pub that can't serve more than light snacks (baked potato, green salad) to vegetarians. </p>
     <input type="submit" value="Save" />
 </form>
 {include file="inc/footer.tpl"}
