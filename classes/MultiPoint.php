@@ -11,19 +11,19 @@ use GeoJson\Geometry\Point;
  */
 class MultiPoint extends \GeoJson\Geometry\MultiPoint
 {
-
     /**
      * Iteratively reduce the coordinates to their center.
      *
-     * @param  array $carry Value of the previous iteration
-     * @param  array $item  Value of the current iteration
+     * @param array $carry Value of the previous iteration
+     * @param array $item  Value of the current iteration
+     *
      * @return array
      */
     private function reduceCenter($carry, $item)
     {
         $len = count($this->coordinates);
 
-        return [$carry[0] + $item[0]/$len, $carry[1] + $item[1]/$len];
+        return [$carry[0] + $item[0] / $len, $carry[1] + $item[1] / $len];
     }
 
     /**
