@@ -65,4 +65,15 @@ class OsmApiTest extends \PHPUnit_Framework_TestCase
     {
         $this->markTestIncomplete('We need a way to reliably create a node first.');
     }
+
+    /**
+     * Test the updateNode() function with a non-existing node.
+     *
+     * @return void
+     * @expectedException GuzzleHttp\Exception\ClientException
+     */
+    public function testUpdateNodeWithWrongNode()
+    {
+        $this->api->updateNode('node', 'foo', []);
+    }
 }
