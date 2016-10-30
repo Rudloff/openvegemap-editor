@@ -52,6 +52,7 @@ class OsmApiTest extends \PHPUnit_Framework_TestCase
         return [
             ['node', 4165743782],
             ['way', 39654586],
+            ['node', 2001604212],
         ];
     }
 

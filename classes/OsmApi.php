@@ -84,6 +84,10 @@ class OsmApi
             $coords = new Point([(float) $node[0]->getAttribute('lon'), (float) $node[0]->getAttribute('lat')]);
         }
 
+        if (isset($tags['website']) && empty(parse_url($tags['website'], PHP_URL_SCHEME))) {
+            $tags['website'] = 'http://'.$tags['website'];
+        }
+
         return new Feature(
             $coords,
             $tags,
