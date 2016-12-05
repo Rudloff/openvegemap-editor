@@ -2,6 +2,7 @@
 /**
  * MultiPoint class.
  */
+
 namespace OpenVegeMap\Editor;
 
 use GeoJson\Geometry\Point;
