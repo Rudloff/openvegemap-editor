@@ -2,6 +2,7 @@
 /**
  * OsmApiTest class.
  */
+
 namespace OpenVegeMap\Test;
 
 use OpenVegeMap\Editor\OsmApi;

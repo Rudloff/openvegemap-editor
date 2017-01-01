@@ -2,6 +2,7 @@
 /**
  * OsmApi class.
  */
+
 namespace OpenVegeMap\Editor;
 
 use FluidXml\FluidXml;

@@ -2,6 +2,7 @@
 /**
  * EditorController class.
  */
+
 namespace OpenVegeMap\Editor\Controller;
 
 use Interop\Container\ContainerInterface;
