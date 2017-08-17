@@ -119,7 +119,7 @@ class MainController
         $unfilteredResults = $results = [];
         if (isset($queryString)) {
             $client = new \Buzz\Browser(new \Buzz\Client\Curl());
-            $consumer = new \Nominatim\Consumer($client, 'http://nominatim.openstreetmap.org');
+            $consumer = new \Nominatim\Consumer($client, 'https://nominatim.openstreetmap.org');
             $query = new \Nominatim\Query();
             $query->setQuery($queryString);
             $unfilteredResults = $consumer->search($query);

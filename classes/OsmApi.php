@@ -40,7 +40,7 @@ class OsmApi
      *
      * @param string $apiUrl Main OSM API URL
      */
-    public function __construct($apiUrl = 'http://api.openstreetmap.org/api/0.6/')
+    public function __construct($apiUrl = 'https://api.openstreetmap.org/api/0.6/')
     {
         $this->client = new \GuzzleHttp\Client();
         $this->apiUrl = $apiUrl;
