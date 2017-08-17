@@ -46,6 +46,17 @@ class MainController
     private $view;
 
     /**
+     * Node types the editor is allowed to edit.
+     *
+     * @var array
+     */
+    const VALID_TYPES = [
+        'shop'    => ['bakery', 'supermarket', 'convenience'],
+        'craft'   => ['caterer'],
+        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub']
+    ];
+
+    /**
      * EditorController constructor.
      *
      * @param Container $container Slim container
@@ -105,13 +116,25 @@ class MainController
     public function search(Request $request, Response $response)
     {
         $queryString = $request->getParam('query');
-        $results = [];
+        $unfilteredResults = $results = [];
         if (isset($queryString)) {
             $client = new \Buzz\Browser(new \Buzz\Client\Curl());
             $consumer = new \Nominatim\Consumer($client, 'http://nominatim.openstreetmap.org');
             $query = new \Nominatim\Query();
             $query->setQuery($queryString);
-            $results = $consumer->search($query);
+            $unfilteredResults = $consumer->search($query);
+        }
+        foreach ($unfilteredResults as $key => $item) {
+            foreach (self::VALID_TYPES as $class => $types) {
+                if ($item['class'] == $class) {
+                    foreach ($types as $type) {
+                        if ($item['type'] == $type) {
+                            $results[] = $item;
+                            break 2;
+                        }
+                    }
+                }
+            }
         }
         $this->view->render(
             $response,
