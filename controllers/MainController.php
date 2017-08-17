@@ -2,6 +2,7 @@
 /**
  * EditorController class.
  */
+
 namespace OpenVegeMap\Editor\Controller;
 
 use Interop\Container\ContainerInterface;
@@ -52,7 +53,7 @@ class MainController
     const VALID_TYPES = [
         'shop'    => ['bakery', 'supermarket', 'convenience'],
         'craft'   => ['caterer'],
-        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub']
+        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub'],
     ];
 
     /**
