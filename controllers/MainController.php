@@ -124,7 +124,7 @@ class MainController
             $query->setQuery($queryString);
             $unfilteredResults = $consumer->search($query);
         }
-        foreach ($unfilteredResults as $key => $item) {
+        foreach ($unfilteredResults as $item) {
             foreach (self::VALID_TYPES as $class => $types) {
                 if ($item['class'] == $class) {
                     foreach ($types as $type) {
