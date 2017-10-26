@@ -1,6 +1,0 @@
-{
-  "name": "openvegemap-editor",
-  "dependencies": {
-    "furtive": "~2.3.0"
-  }
-}
