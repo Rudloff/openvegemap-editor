@@ -5,7 +5,7 @@
   "author": "Pierre Rudloff",
   "bugs": "https://github.com/Rudloff/openvegemap-editor/issues",
   "dependencies": {
-      "furtive": "~2.3.0"
+    "furtive": "~2.4.0"
   },
   "devDependencies": {
     "grunt": "~1.0.1",

@@ -333,9 +333,9 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-furtive@~2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/furtive/-/furtive-2.3.0.tgz#08a029c7f687108c6e9fa7d25d1a5b82c63ec8ff"
+furtive@~2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/furtive/-/furtive-2.4.0.tgz#cc69244ebed1785df83328cef7dc1db7a2770350"
 
 get-stdin@^4.0.1:
   version "4.0.1"
