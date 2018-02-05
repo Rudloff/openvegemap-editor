@@ -8,6 +8,7 @@ namespace OpenVegeMap\Editor;
 use FluidXml\FluidXml;
 use GeoJson\Feature\Feature;
 use GeoJson\Geometry\Point;
+use GuzzleHttp\Client;
 
 /**
  * Manage calls to the various OpenStreetMap APIs.
@@ -17,7 +18,7 @@ class OsmApi
     /**
      * Guzzle HTTP client.
      *
-     * @var \GuzzleHttp\Client
+     * @var Client
      */
     private $client;
 
@@ -42,7 +43,7 @@ class OsmApi
      */
     public function __construct($apiUrl = 'https://api.openstreetmap.org/api/0.6/')
     {
-        $this->client = new \GuzzleHttp\Client();
+        $this->client = new Client();
         $this->apiUrl = $apiUrl;
     }
 

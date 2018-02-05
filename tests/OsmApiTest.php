@@ -5,12 +5,14 @@
 
 namespace OpenVegeMap\Test;
 
+use GeoJson\Feature\Feature;
 use OpenVegeMap\Editor\OsmApi;
+use PHPUnit_Framework_TestCase;
 
 /**
  * Tests for the OsmApi class.
  */
-class OsmApiTest extends \PHPUnit_Framework_TestCase
+class OsmApiTest extends PHPUnit_Framework_TestCase
 {
     /**
      * OsmApi instance.
@@ -39,7 +41,7 @@ class OsmApiTest extends \PHPUnit_Framework_TestCase
     public function testgetById($type, $id)
     {
         $feature = $this->api->getById($type, $id);
-        $this->assertInstanceOf('GeoJson\Feature\Feature', $feature);
+        $this->assertInstanceOf(Feature::class, $feature);
         $this->assertEquals($id, $feature->getId());
     }
 

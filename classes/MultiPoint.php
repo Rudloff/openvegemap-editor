@@ -5,12 +5,13 @@
 
 namespace OpenVegeMap\Editor;
 
+use GeoJson\Geometry\MultiPoint as GeoJsonMultiPoint;
 use GeoJson\Geometry\Point;
 
 /**
  * Extended MultiPoint class in order to add some missing functions.
  */
-class MultiPoint extends \GeoJson\Geometry\MultiPoint
+class MultiPoint extends GeoJsonMultiPoint
 {
     /**
      * Get the center of the coordinates.
