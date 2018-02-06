@@ -77,8 +77,8 @@ class MainController
         }
         $this->msg = new FlashMessages();
         $this->msg->setCssClassMap([
-            FlashMessages::SUCCESS => 'brdr--dark-gray p1 fnt--green',
-            FlashMessages::ERROR   => 'brdr--dark-gray p1 fnt--red',
+            FlashMessages::SUCCESS => 'brdr--mid-gray p1 fnt--green',
+            FlashMessages::ERROR   => 'brdr--mid-gray p1 fnt--red',
         ]);
     }
 
