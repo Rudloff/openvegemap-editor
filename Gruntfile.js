@@ -55,6 +55,7 @@ module.exports = function (grunt) {
                 prod: {
                     deployTo: '/var/www/openvegemap-editor/',
                     servers: 'pierre@dev.rudloff.pro',
+                    postUpdateCmd: 'yarn install --production',
                     composer: {
                         noDev: true
                     }
