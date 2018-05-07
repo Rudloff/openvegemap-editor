@@ -11,6 +11,7 @@ use Exception;
 use Interop\Container\ContainerInterface;
 use Nominatim\Consumer;
 use Nominatim\Query;
+use Nominatim\Result\Collection;
 use OpenVegeMap\Editor\OsmApi;
 use Plasticbrain\FlashMessages\FlashMessages;
 use Slim\Container;
@@ -130,13 +131,15 @@ class MainController
             $query->setQuery($queryString);
             $unfilteredResults = $consumer->search($query);
         }
-        foreach ($unfilteredResults as $item) {
-            foreach (self::VALID_TYPES as $class => $types) {
-                if ($item['class'] == $class) {
-                    foreach ($types as $type) {
-                        if ($item['type'] == $type) {
-                            $results[] = $item;
-                            break 2;
+        if ($unfilteredResults instanceof Collection) {
+            foreach ($unfilteredResults as $item) {
+                foreach (self::VALID_TYPES as $class => $types) {
+                    if ($item['class'] == $class) {
+                        foreach ($types as $type) {
+                            if ($item['type'] == $type) {
+                                $results[] = $item;
+                                break 2;
+                            }
                         }
                     }
                 }
