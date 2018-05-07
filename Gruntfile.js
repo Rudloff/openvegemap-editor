@@ -22,7 +22,7 @@ module.exports = function (grunt) {
             },
             phpunit: {
                 options: {
-                    bin: 'php -dzend_extension=xdebug.so ./vendor/bin/phpunit',
+                    bin: 'vendor/bin/phpunit',
                     stopOnError: true,
                     stopOnFailure: true,
                     followOutput: true
@@ -50,6 +50,15 @@ module.exports = function (grunt) {
                         directory: 'classes/,controllers/,tests/'
                     }
                 }
+            },
+            shipit: {
+                prod: {
+                    deployTo: '/var/www/openvegemap-editor/',
+                    servers: 'pierre@dev.rudloff.pro',
+                    composer: {
+                        noDev: true
+                    }
+                }
             }
         }
     );
@@ -60,8 +69,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-fixpack');
     grunt.loadNpmTasks('grunt-phpdocumentor');
+    grunt.loadNpmTasks('grunt-shipit');
+    grunt.loadNpmTasks('shipit-git-update');
+    grunt.loadNpmTasks('shipit-composer-simple');
 
     grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
     grunt.registerTask('doc', ['phpdocumentor']);
+    grunt.registerTask('prod', ['shipit:prod', 'update', 'composer:install']);
 };

@@ -3,17 +3,17 @@
   "description": "Edit tags on OpenVegeMap",
   "license": "GPL-3.0",
   "require": {
-    "guzzlehttp/guzzle": "~6.2.2",
+    "guzzlehttp/guzzle": "~6.3.3",
     "jmikola/geojson": "~1.0.2",
     "slim/slim": "~3.5.0",
     "mathmarques/smarty-view": "~1.1.1",
-    "servo/fluidxml": "~1.20.3",
+    "servo/fluidxml": "~1.21.0",
     "plasticbrain/php-flash-messages": "~1.0.1",
     "nixilla/nominatim-consumer": "~0.1.1"
   },
   "require-dev": {
     "symfony/var-dumper": "~3.1.0",
-    "squizlabs/php_codesniffer": "~2.6.2",
+    "squizlabs/php_codesniffer": "~3.0.1",
     "phpunit/phpunit": "~5.5.2"
   },
   "autoload": {

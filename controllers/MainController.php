@@ -5,12 +5,18 @@
 
 namespace OpenVegeMap\Editor\Controller;
 
+use Buzz\Browser;
+use Buzz\Client\Curl;
+use Exception;
 use Interop\Container\ContainerInterface;
+use Nominatim\Consumer;
+use Nominatim\Query;
 use OpenVegeMap\Editor\OsmApi;
 use Plasticbrain\FlashMessages\FlashMessages;
 use Slim\Container;
-use Slim\Http\Request as Request;
-use Slim\Http\Response as Response;
+use Slim\Http\Request;
+use Slim\Http\Response;
+use Slim\Views\Smarty;
 
 /**
  * Main controller for the editor.
@@ -41,7 +47,7 @@ class MainController
     /**
      * Smarty view.
      *
-     * @var \Slim\Views\Smarty
+     * @var Smarty
      */
     private $view;
 
@@ -51,9 +57,9 @@ class MainController
      * @var array
      */
     const VALID_TYPES = [
-        'shop'    => ['bakery', 'supermarket', 'convenience'],
-        'craft'   => ['caterer'],
-        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub'],
+        'shop'    => ['bakery', 'supermarket', 'convenience', 'deli', 'ice_cream', 'pasta', 'general'],
+        'craft'   => ['caterer', 'confectionery'],
+        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub', 'ice_cream'],
     ];
 
     /**
@@ -71,8 +77,8 @@ class MainController
         }
         $this->msg = new FlashMessages();
         $this->msg->setCssClassMap([
-            FlashMessages::SUCCESS => 'brdr--dark-gray p1 fnt--green',
-            FlashMessages::ERROR   => 'brdr--dark-gray p1 fnt--red',
+            FlashMessages::SUCCESS => 'brdr--mid-gray p1 fnt--green',
+            FlashMessages::ERROR   => 'brdr--mid-gray p1 fnt--red',
         ]);
     }
 
@@ -118,13 +124,13 @@ class MainController
         $queryString = $request->getParam('query');
         $unfilteredResults = $results = [];
         if (isset($queryString)) {
-            $client = new \Buzz\Browser(new \Buzz\Client\Curl());
-            $consumer = new \Nominatim\Consumer($client, 'http://nominatim.openstreetmap.org');
-            $query = new \Nominatim\Query();
+            $client = new Browser(new Curl());
+            $consumer = new Consumer($client, 'https://nominatim.openstreetmap.org');
+            $query = new Query();
             $query->setQuery($queryString);
             $unfilteredResults = $consumer->search($query);
         }
-        foreach ($unfilteredResults as $key => $item) {
+        foreach ($unfilteredResults as $item) {
             foreach (self::VALID_TYPES as $class => $types) {
                 if ($item['class'] == $class) {
                     foreach ($types as $type) {
@@ -161,7 +167,7 @@ class MainController
             try {
                 $this->api->updateNode($request->getAttribute('type'), $request->getAttribute('id'), $params);
                 $this->msg->success('Your edit has been submitted, the map will be updated shortly.', null, true);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->msg->error($e->getMessage(), null, true);
             }
         }
