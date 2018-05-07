@@ -8,4 +8,5 @@
         <link rel="icon" href="img/logo_32.png" />
     </head>
     <body class="p1 bg--white measure">
+        <a href="https://openvegemap.netlib.re/">⬅️ Back to the map</a>
         <h1 class="txt--center"><a href="{base_url}">OVM editor</a></h1>
