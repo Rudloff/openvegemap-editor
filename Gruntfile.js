@@ -16,6 +16,9 @@ module.exports = function (grunt) {
                 }
             },
             jslint: {
+                js: {
+                    src: ['js/*.js']
+                },
                 Gruntfile: {
                     src: ['Gruntfile.js']
                 }
