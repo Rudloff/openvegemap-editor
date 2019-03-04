@@ -146,6 +146,9 @@ class OsmApi
         $node = $xml->query($type);
         $node->attr('changeset', $this->getChangeset());
         $node->attr('timestamp', date('c'));
+        if (in_array($tags['diet:vegan'], ['only', 'yes'])) {
+            $tags['diet:vegetarian'] = 'yes';
+        }
         foreach ($tags as $key => $value) {
             if (!empty($value) && in_array($key, self::ALLOWED_TAGS)) {
                 $tag = $node->query('tag[k="'.$key.'"]');
