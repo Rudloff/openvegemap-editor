@@ -1,7 +1,7 @@
 {
   "name": "rudloff/openvegemap-editor",
   "description": "Edit tags on OpenVegeMap",
-  "license": "GPL-3.0",
+  "license": "GPL-3.0-only",
   "require": {
     "guzzlehttp/guzzle": "~6.3.3",
     "jmikola/geojson": "~1.0.2",
