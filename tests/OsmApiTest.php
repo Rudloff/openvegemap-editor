@@ -7,12 +7,12 @@ namespace OpenVegeMap\Test;
 
 use GeoJson\Feature\Feature;
 use OpenVegeMap\Editor\OsmApi;
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the OsmApi class.
  */
-class OsmApiTest extends PHPUnit_Framework_TestCase
+class OsmApiTest extends TestCase
 {
     /**
      * OsmApi instance.
