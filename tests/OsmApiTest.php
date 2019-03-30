@@ -77,6 +77,6 @@ class OsmApiTest extends TestCase
      */
     public function testUpdateNodeWithWrongNode()
     {
-        $this->api->updateNode('node', 'foo', []);
+        $this->api->updateNode('node', 42, []);
     }
 }

@@ -66,7 +66,7 @@ class MainController
     /**
      * EditorController constructor.
      *
-     * @param Container $container Slim container
+     * @param ContainerInterface $container Slim container
      */
     public function __construct(ContainerInterface $container)
     {
