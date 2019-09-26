@@ -5,12 +5,17 @@ var editForm = (function () {
 
     function onChange(e) {
         var vegetarianInput = document.getElementById('diet:vegetarian');
+        var vegetarianNoOption = document.getElementById('diet:vegetarian-no');
         var triggerValues = ['yes', 'only'];
+
         if (triggerValues.includes(e.target.value)) {
-            vegetarianInput.disabled = true;
-            vegetarianInput.value = 'yes';
+            vegetarianNoOption.disabled = true;
+
+            if (vegetarianInput.value === 'no') {
+                vegetarianInput.value = 'yes';
+            }
         } else {
-            vegetarianInput.disabled = false;
+            vegetarianNoOption.disabled = false;
         }
     }
 

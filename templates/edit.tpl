@@ -20,9 +20,9 @@
                 <label class="grd-row-col-2-6" for="{$property}">{$label}</label>
                 <select class="grd-row-col-4-6" name="{$property}" id="{$property}">
                     <option value="">I don't know</option>
-                    <option value="yes" {if isset($properties.$property) && $properties.$property == 'yes'}selected{/if}>Yes</option>
-                    <option value="only" {if isset($properties.$property) && $properties.$property == 'only'}selected{/if}>Only</option>
-                    <option value="no" {if isset($properties.$property) && $properties.$property == 'no'}selected{/if}>No</option>
+                    <option id="{$property}-yes" value="yes" {if isset($properties.$property) && $properties.$property == 'yes'}selected{/if}>Yes</option>
+                    <option id="{$property}-only" value="only" {if isset($properties.$property) && $properties.$property == 'only'}selected{/if}>Only</option>
+                    <option id="{$property}-no" value="no" {if isset($properties.$property) && $properties.$property == 'no'}selected{/if}>No</option>
                 </select>
             </div>
         {/foreach}
