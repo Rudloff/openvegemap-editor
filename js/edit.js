@@ -1,14 +1,14 @@
-/*jslint browser: true*/
+/*jslint browser, es6*/
 /*global window*/
-var editForm = (function () {
+const editForm = (function () {
     'use strict';
 
     function onChange(e) {
-        var vegetarianInput = document.getElementById('diet:vegetarian');
-        var vegetarianNoOption = document.getElementById('diet:vegetarian-no');
-        var triggerValues = ['yes', 'only'];
+        const vegetarianInput = document.getElementById('diet:vegetarian');
+        const vegetarianNoOption = document.getElementById('diet:vegetarian-no');
+        const triggerValues = ['yes', 'only'];
 
-        if (triggerValues.includes(e.target.value)) {
+        if (triggerValues.includes(e.target.value)) {
             vegetarianNoOption.disabled = true;
 
             if (vegetarianInput.value === 'no') {
@@ -20,7 +20,7 @@ var editForm = (function () {
     }
 
     function init() {
-        var veganInput = document.getElementById('diet:vegan');
+        const veganInput = document.getElementById('diet:vegan');
         veganInput.addEventListener('change', onChange, false);
         onChange({target: veganInput});
     }
