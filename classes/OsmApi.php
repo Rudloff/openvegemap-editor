@@ -9,6 +9,7 @@ use FluidXml\FluidXml;
 use GeoJson\Feature\Feature;
 use GeoJson\Geometry\Point;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Manage calls to the various OpenStreetMap APIs.
@@ -51,9 +52,10 @@ class OsmApi
      * Get OSM node by ID.
      *
      * @param string $type OSM type (node or way)
-     * @param int    $id   OSM node ID
+     * @param int $id OSM node ID
      *
      * @return Feature OSM node
+     * @throws GuzzleException
      */
     public function getById($type, $id)
     {
@@ -63,7 +65,7 @@ class OsmApi
         }
         $result = $this->client->request(
             'GET',
-            $this->apiUrl.$type.'/'.$id.$suffix,
+            $this->apiUrl . $type . '/' . $id . $suffix,
             [
                 'auth' => [OSM_USER, OSM_PASS],
             ]
@@ -78,16 +80,16 @@ class OsmApi
         if ($type == 'way') {
             $subnodes = [];
             foreach ($xml->query('node') as $subnode) {
-                $subnodes[] = new Point([(float) $subnode->getAttribute('lon'), (float) $subnode->getAttribute('lat')]);
+                $subnodes[] = new Point([(float)$subnode->getAttribute('lon'), (float)$subnode->getAttribute('lat')]);
             }
             $way = new MultiPoint($subnodes);
             $coords = $way->getCenter();
         } else {
-            $coords = new Point([(float) $node[0]->getAttribute('lon'), (float) $node[0]->getAttribute('lat')]);
+            $coords = new Point([(float)$node[0]->getAttribute('lon'), (float)$node[0]->getAttribute('lat')]);
         }
 
         if (isset($tags['website']) && empty(parse_url($tags['website'], PHP_URL_SCHEME))) {
-            $tags['website'] = 'http://'.$tags['website'];
+            $tags['website'] = 'http://' . $tags['website'];
         }
 
         return new Feature(
@@ -101,6 +103,7 @@ class OsmApi
      * Get new OSM changeset ID.
      *
      * @return int Changeset ID
+     * @throws GuzzleException
      */
     private function getChangeset()
     {
@@ -112,30 +115,31 @@ class OsmApi
 
         $result = $this->client->request(
             'PUT',
-            $this->apiUrl.'changeset/create',
+            $this->apiUrl . 'changeset/create',
             [
                 'auth' => [OSM_USER, OSM_PASS],
                 'body' => $osm,
             ]
         );
 
-        return (int) $result->getBody()->getContents();
+        return (int)$result->getBody()->getContents();
     }
 
     /**
      * Update an OSM node with new tag values.
      *
      * @param string $type OSM type (node or way)
-     * @param int    $id   OSM node ID
-     * @param array  $tags Tags
+     * @param int $id OSM node ID
+     * @param array $tags Tags
      *
      * @return void
+     * @throws GuzzleException
      */
     public function updateNode($type, $id, array $tags)
     {
         $baseXml = $this->client->request(
             'GET',
-            $this->apiUrl.$type.'/'.$id,
+            $this->apiUrl . $type . '/' . $id,
             [
                 'auth' => [OSM_USER, OSM_PASS],
             ]
@@ -151,7 +155,7 @@ class OsmApi
         }
         foreach ($tags as $key => $value) {
             if (!empty($value) && in_array($key, self::ALLOWED_TAGS)) {
-                $tag = $node->query('tag[k="'.$key.'"]');
+                $tag = $node->query('tag[k="' . $key . '"]');
                 if ($tag->size() > 0) {
                     $tag->attr('v', $value);
                 } else {
@@ -162,7 +166,7 @@ class OsmApi
 
         $this->client->request(
             'PUT',
-            $this->apiUrl.$type.'/'.$id,
+            $this->apiUrl . $type . '/' . $id,
             [
                 'auth' => [OSM_USER, OSM_PASS],
                 'body' => $xml,

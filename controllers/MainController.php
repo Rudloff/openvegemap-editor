@@ -14,7 +14,6 @@ use Nominatim\Query;
 use Nominatim\Result\Collection;
 use OpenVegeMap\Editor\OsmApi;
 use Plasticbrain\FlashMessages\FlashMessages;
-use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
 use Slim\Views\Smarty;
@@ -58,8 +57,8 @@ class MainController
      * @var array
      */
     const VALID_TYPES = [
-        'shop'    => ['bakery', 'supermarket', 'convenience', 'deli', 'ice_cream', 'pasta', 'general'],
-        'craft'   => ['caterer', 'confectionery'],
+        'shop' => ['bakery', 'supermarket', 'convenience', 'deli', 'ice_cream', 'pasta', 'general'],
+        'craft' => ['caterer', 'confectionery'],
         'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub', 'ice_cream'],
     ];
 
@@ -79,14 +78,14 @@ class MainController
         $this->msg = new FlashMessages();
         $this->msg->setCssClassMap([
             FlashMessages::SUCCESS => 'brdr--mid-gray p1 fnt--green',
-            FlashMessages::ERROR   => 'brdr--mid-gray p1 fnt--red',
+            FlashMessages::ERROR => 'brdr--mid-gray p1 fnt--red',
         ]);
     }
 
     /**
      * Display the node edit page.
      *
-     * @param Request  $request  HTTP request
+     * @param Request $request HTTP request
      * @param Response $response HTTP response
      *
      * @return Response
@@ -99,23 +98,25 @@ class MainController
             $response,
             'edit.tpl',
             [
-                'properties'     => $feature->getProperties(),
-                'coords'         => $feature->getGeometry()->getCoordinates(),
-                'id'             => $feature->getId(),
-                'msg'            => $this->msg->display(null, false),
-                'type'           => $type,
+                'properties' => $feature->getProperties(),
+                'coords' => $feature->getGeometry()->getCoordinates(),
+                'id' => $feature->getId(),
+                'msg' => $this->msg->display(null, false),
+                'type' => $type,
                 'editProperties' => [
-                    'diet:vegan'      => 'Vegan',
+                    'diet:vegan' => 'Vegan',
                     'diet:vegetarian' => 'Vegetarian',
                 ],
             ]
         );
+
+        return $response;
     }
 
     /**
      * Display the search page.
      *
-     * @param Request  $request  HTTP request
+     * @param Request $request HTTP request
      * @param Response $response HTTP response
      *
      * @return Response
@@ -149,16 +150,18 @@ class MainController
             $response,
             'search.tpl',
             [
-                'query'   => $queryString,
+                'query' => $queryString,
                 'results' => $results,
             ]
         );
+
+        return $response;
     }
 
     /**
      * Submit an edit query.
      *
-     * @param Request  $request  HTTP request
+     * @param Request $request HTTP request
      * @param Response $response HTTP response
      *
      * @return Response
