@@ -46,13 +46,6 @@ module.exports = function (grunt) {
                 package: {
                     src: 'package.json'
                 }
-            },
-            phpdocumentor: {
-                doc: {
-                    options: {
-                        directory: 'classes/,controllers/,tests/'
-                    }
-                }
             }
         }
     );
@@ -62,9 +55,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jslint');
     grunt.loadNpmTasks('grunt-jsonlint');
     grunt.loadNpmTasks('grunt-fixpack');
-    grunt.loadNpmTasks('grunt-phpdocumentor');
 
     grunt.registerTask('lint', ['jslint', 'fixpack', 'jsonlint', 'phpcs']);
     grunt.registerTask('test', ['phpunit']);
-    grunt.registerTask('doc', ['phpdocumentor']);
 };
