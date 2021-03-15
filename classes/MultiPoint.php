@@ -18,7 +18,7 @@ class MultiPoint extends GeoJsonMultiPoint
      *
      * @return Point
      */
-    public function getCenter()
+    public function getCenter(): Point
     {
         $max_lat = $min_lat = $this->coordinates[0][1];
         $max_lon = $min_lon = $this->coordinates[0][0];

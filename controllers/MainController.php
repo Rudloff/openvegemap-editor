@@ -9,6 +9,7 @@ use Buzz\Browser;
 use Buzz\Client\Curl;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use Interop\Container\ContainerInterface;
 use Nominatim\Consumer;
 use Nominatim\Query;
@@ -90,13 +91,14 @@ class MainController
      * @param Response $response HTTP response
      *
      * @return Response
+     * @throws GuzzleException
      */
-    public function edit(Request $request, Response $response)
+    public function edit(Request $request, Response $response): Response
     {
         $type = $request->getAttribute('type');
 
         try {
-            $feature = $this->api->getById($type, $request->getAttribute('id'));
+            $feature = $this->api->getById($type, intval($request->getAttribute('id')));
         } catch (ClientException $e) {
             return $response->withStatus(404)->write('This element does not exist.');
         }
@@ -128,7 +130,7 @@ class MainController
      *
      * @return Response
      */
-    public function search(Request $request, Response $response)
+    public function search(Request $request, Response $response): Response
     {
         $queryString = $request->getParam('query');
         $unfilteredResults = $results = [];
@@ -172,13 +174,14 @@ class MainController
      * @param Response $response HTTP response
      *
      * @return Response
+     * @throws GuzzleException
      */
-    public function submit(Request $request, Response $response)
+    public function submit(Request $request, Response $response): Response
     {
         $params = $request->getParsedBody();
         if (is_array($params)) {
             try {
-                $this->api->updateNode($request->getAttribute('type'), $request->getAttribute('id'), $params);
+                $this->api->updateNode($request->getAttribute('type'), intval($request->getAttribute('id')), $params);
                 $this->msg->success('Your edit has been submitted, the map will be updated shortly.', null, true);
             } catch (Exception $e) {
                 $this->msg->error($e->getMessage(), null, true);
