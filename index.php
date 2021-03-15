@@ -22,4 +22,9 @@ $controller = new MainController($container);
 $app->get('/{type}/{id}', [$controller, 'edit']);
 $app->get('/', [$controller, 'search']);
 $app->post('/{type}/{id}', [$controller, 'submit']);
-$app->run();
+
+try {
+    $app->run();
+} catch (Exception $e) {
+    die('Error: ' . $e->getMessage());
+}
