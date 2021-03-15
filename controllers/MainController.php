@@ -8,6 +8,7 @@ namespace OpenVegeMap\Editor\Controller;
 use Buzz\Browser;
 use Buzz\Client\Curl;
 use Exception;
+use GuzzleHttp\Exception\ClientException;
 use Interop\Container\ContainerInterface;
 use Nominatim\Consumer;
 use Nominatim\Query;
@@ -93,7 +94,13 @@ class MainController
     public function edit(Request $request, Response $response)
     {
         $type = $request->getAttribute('type');
-        $feature = $this->api->getById($type, $request->getAttribute('id'));
+
+        try {
+            $feature = $this->api->getById($type, $request->getAttribute('id'));
+        } catch (ClientException $e) {
+            return $response->withStatus(404)->write('This element does not exist.');
+        }
+
         $this->view->render(
             $response,
             'edit.tpl',
