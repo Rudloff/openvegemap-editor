@@ -3,8 +3,6 @@ php:
   - 5.6
 install:
   - composer install --no-dev
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
 env:
   global:
     - OSM_USER="openvegemap@rudloff.pro"
