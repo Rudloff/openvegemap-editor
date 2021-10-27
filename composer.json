@@ -20,8 +20,11 @@
   },
   "autoload": {
     "psr-4": {
-      "OpenVegeMap\\Editor\\": "classes/",
-      "OpenVegeMap\\Editor\\Controller\\": "controllers/",
+      "OpenVegeMap\\Editor\\": "classes/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
       "OpenVegeMap\\Test\\": "tests/"
     }
   }
