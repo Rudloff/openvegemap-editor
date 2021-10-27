@@ -26,7 +26,7 @@ class OsmApiTest extends TestCase
     /**
      * Setup properties used in multiple tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = new OsmApi();
     }
@@ -41,7 +41,7 @@ class OsmApiTest extends TestCase
      * @dataProvider nodeProvider
      * @throws GuzzleException
      */
-    public function testgetById($type, $id)
+    public function testgetById(string $type, int $id)
     {
         $feature = $this->api->getById($type, $id);
         $this->assertInstanceOf(Feature::class, $feature);

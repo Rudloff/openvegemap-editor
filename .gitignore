@@ -7,3 +7,4 @@ coverage/
 clover.xml
 config_test.php
 docs/
+.phpunit.result.cache
