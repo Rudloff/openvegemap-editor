@@ -61,7 +61,7 @@ class MainController
     const VALID_TYPES = [
         'shop' => ['bakery', 'supermarket', 'convenience', 'deli', 'ice_cream', 'pasta', 'general'],
         'craft' => ['caterer', 'confectionery'],
-        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub', 'ice_cream'],
+        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub', 'ice_cream', 'biergarten'],
     ];
 
     /**
