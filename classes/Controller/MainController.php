@@ -10,15 +10,15 @@ use Buzz\Client\Curl;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Interop\Container\ContainerInterface;
 use Nominatim\Consumer;
 use Nominatim\Query;
 use Nominatim\Result\Collection;
 use OpenVegeMap\Editor\OsmApi;
-use PH7\JustHttp\StatusCode;
 use Plasticbrain\FlashMessages\FlashMessages;
+use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Http\StatusCode;
 use Slim\Views\Smarty;
 
 /**
@@ -101,7 +101,7 @@ class MainController
         try {
             $feature = $this->api->getById($type, intval($request->getAttribute('id')));
         } catch (ClientException $e) {
-            return $response->withStatus(StatusCode::NOT_FOUND)->write('This element does not exist.');
+            return $response->withStatus(StatusCode::HTTP_NOT_FOUND)->write('This element does not exist.');
         }
 
         $properties = ($feature->getProperties());
@@ -118,7 +118,7 @@ class MainController
         }
 
         if (!$validType) {
-            return $response->withStatus(StatusCode::FORBIDDEN)->write('This type can not use diet tags.');
+            return $response->withStatus(StatusCode::HTTP_FORBIDDEN)->write('This type can not use diet tags.');
         }
 
         $this->view->render(
