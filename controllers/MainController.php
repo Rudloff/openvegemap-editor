@@ -15,6 +15,7 @@ use Nominatim\Consumer;
 use Nominatim\Query;
 use Nominatim\Result\Collection;
 use OpenVegeMap\Editor\OsmApi;
+use PH7\JustHttp\StatusCode;
 use Plasticbrain\FlashMessages\FlashMessages;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -100,7 +101,7 @@ class MainController
         try {
             $feature = $this->api->getById($type, intval($request->getAttribute('id')));
         } catch (ClientException $e) {
-            return $response->withStatus(404)->write('This element does not exist.');
+            return $response->withStatus(StatusCode::NOT_FOUND)->write('This element does not exist.');
         }
 
         $properties = ($feature->getProperties());
@@ -117,7 +118,7 @@ class MainController
         }
 
         if (!$validType) {
-            return $response->withStatus(403)->write('This type can not use diet tags.');
+            return $response->withStatus(StatusCode::FORBIDDEN)->write('This type can not use diet tags.');
         }
 
         $this->view->render(

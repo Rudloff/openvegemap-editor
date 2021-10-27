@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0527c859e4d5760cafc66df741abd95",
+    "content-hash": "774d37e5ce41f6516452aa8231a73efa",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -465,6 +465,60 @@
                 "osm"
             ],
             "time": "2015-01-12T12:05:38+00:00"
+        },
+        {
+            "name": "ph-7/just-http-status-codes",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pH-7/JustHttpStatusCodes.git",
+                "reference": "3b6346f69006c103764c00446edfb675a208997a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pH-7/JustHttpStatusCodes/zipball/3b6346f69006c103764c00446edfb675a208997a",
+                "reference": "3b6346f69006c103764c00446edfb675a208997a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PH7\\JustHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pierre-Henry Soria",
+                    "email": "hi@ph7.me",
+                    "homepage": "https://ph7.me",
+                    "role": "Principle Developer"
+                }
+            ],
+            "description": "Just all HTTP status codes",
+            "homepage": "https://pierrehenry.be",
+            "keywords": [
+                "Magic Number",
+                "PHP status codes",
+                "clean code",
+                "code",
+                "constant",
+                "constants",
+                "http",
+                "http code",
+                "http status code",
+                "status code"
+            ],
+            "time": "2021-10-11T10:27:49+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -2582,5 +2636,6 @@
     "platform": {
         "php": ">=7.3"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
 }
