@@ -103,6 +103,23 @@ class MainController
             return $response->withStatus(404)->write('This element does not exist.');
         }
 
+        $properties = ($feature->getProperties());
+        $validType = false;
+        foreach (self::VALID_TYPES as $class => $types) {
+            if (isset($properties[$class])) {
+                foreach ($types as $type) {
+                    if ($properties[$class] == $type) {
+                        $validType = true;
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        if (!$validType) {
+            return $response->withStatus(403)->write('This type can not use diet tags.');
+        }
+
         $this->view->render(
             $response,
             'edit.tpl',
