@@ -5,14 +5,11 @@
 
 namespace OpenVegeMap\Editor\Controller;
 
-use Buzz\Browser;
-use Buzz\Client\Curl;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
-use Nominatim\Consumer;
-use Nominatim\Query;
-use Nominatim\Result\Collection;
+use maxh\Nominatim\Exceptions\NominatimException;
+use maxh\Nominatim\Nominatim;
 use OpenVegeMap\Editor\OsmApi;
 use Plasticbrain\FlashMessages\FlashMessages;
 use Psr\Container\ContainerInterface;
@@ -147,19 +144,20 @@ class MainController
      * @param Response $response HTTP response
      *
      * @return Response
+     * @throws GuzzleException
+     * @throws NominatimException
      */
     public function search(Request $request, Response $response): Response
     {
         $queryString = $request->getParam('query');
         $unfilteredResults = $results = [];
         if (isset($queryString)) {
-            $client = new Browser(new Curl());
-            $consumer = new Consumer($client, 'https://nominatim.openstreetmap.org');
-            $query = new Query();
-            $query->setQuery($queryString);
-            $unfilteredResults = $consumer->search($query);
+            $consumer = new Nominatim('https://nominatim.openstreetmap.org');
+            $query = $consumer->newSearch();
+            $query->query($queryString);
+            $unfilteredResults = $consumer->find($query);
         }
-        if ($unfilteredResults instanceof Collection) {
+        if (!empty($unfilteredResults)) {
             foreach ($unfilteredResults as $item) {
                 foreach (self::VALID_TYPES as $class => $types) {
                     if ($item['class'] == $class) {

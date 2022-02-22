@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1df15a345b2addcf2d0ea30a2078294d",
+    "content-hash": "53bbe5b090b9478287297077f7d271da",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -259,60 +259,6 @@
             "time": "2015-09-27T15:35:21+00:00"
         },
         {
-            "name": "kriswallsmith/buzz",
-            "version": "v0.16.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kriswallsmith/Buzz.git",
-                "reference": "4977b7d44dbef49cdc641f14be6512fdcfe32f12"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kriswallsmith/Buzz/zipball/4977b7d44dbef49cdc641f14be6512fdcfe32f12",
-                "reference": "4977b7d44dbef49cdc641f14be6512fdcfe32f12",
-                "shasum": ""
-            },
-            "require": {
-                "guzzlehttp/psr7": "^1.4",
-                "php": "^5.4 || ^7.0"
-            },
-            "require-dev": {
-                "php-http/client-integration-tests": "^0.6.2",
-                "symfony/phpunit-bridge": "^3.4 || ^4.0"
-            },
-            "suggest": {
-                "ext-curl": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Buzz\\": "lib/Buzz"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kris Wallsmith",
-                    "email": "kris.wallsmith@gmail.com",
-                    "homepage": "http://kriswallsmith.net/"
-                }
-            ],
-            "description": "Lightweight HTTP client",
-            "homepage": "https://github.com/kriswallsmith/Buzz",
-            "keywords": [
-                "curl",
-                "http client"
-            ],
-            "support": {
-                "issues": "https://github.com/kriswallsmith/Buzz/issues",
-                "source": "https://github.com/kriswallsmith/Buzz/tree/master"
-            },
-            "time": "2018-03-19T10:34:40+00:00"
-        },
-        {
             "name": "mathmarques/smarty-view",
             "version": "1.1.1",
             "source": {
@@ -367,6 +313,64 @@
             "time": "2016-08-25T19:04:49+00:00"
         },
         {
+            "name": "maxh/php-nominatim",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maxhelias/php-nominatim.git",
+                "reference": "49a220320d1fec85b0091ea92a2bb699a3869b1a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maxhelias/php-nominatim/zipball/49a220320d1fec85b0091ea92a2bb699a3869b1a",
+                "reference": "49a220320d1fec85b0091ea92a2bb699a3869b1a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "guzzlehttp/guzzle": "@stable",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "dev-master",
+                "phpro/grumphp-shim": "^1.4",
+                "phpunit/phpunit": "^8.5|^9.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "maxh\\Nominatim\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maxime Helias",
+                    "email": "maximehelias16@gmail.com",
+                    "homepage": "http://maximehelias.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Wrapper for Nominatim API",
+            "homepage": "https://github.com/maxhelias/php-nominatim",
+            "keywords": [
+                "geo",
+                "geolocation",
+                "nominatim",
+                "open street map",
+                "osm",
+                "web service"
+            ],
+            "support": {
+                "issues": "https://github.com/maxhelias/php-nominatim/issues",
+                "source": "https://github.com/maxhelias/php-nominatim/tree/2.3.0"
+            },
+            "time": "2021-07-17T14:13:17+00:00"
+        },
+        {
             "name": "nikic/fast-route",
             "version": "v1.3.0",
             "source": {
@@ -415,56 +419,6 @@
                 "source": "https://github.com/nikic/FastRoute/tree/master"
             },
             "time": "2018-02-13T20:26:39+00:00"
-        },
-        {
-            "name": "nixilla/nominatim-consumer",
-            "version": "0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nixilla/nominatim-consumer.git",
-                "reference": "e1289022266e3bae3e2d84821b5b130463535caa"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nixilla/nominatim-consumer/zipball/e1289022266e3bae3e2d84821b5b130463535caa",
-                "reference": "e1289022266e3bae3e2d84821b5b130463535caa",
-                "shasum": ""
-            },
-            "require": {
-                "kriswallsmith/buzz": "~0.10",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpspec/phpspec": "2.0.*@dev"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Nominatim": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Janusz Slota",
-                    "email": "janusz.slota@nixilla.com",
-                    "homepage": "http://www.nixilla.com"
-                }
-            ],
-            "description": "Nominatim consumer in PHP",
-            "keywords": [
-                "api",
-                "nominatim",
-                "osm"
-            ],
-            "support": {
-                "issues": "https://github.com/nixilla/nominatim-consumer/issues",
-                "source": "https://github.com/nixilla/nominatim-consumer/tree/master"
-            },
-            "time": "2015-01-12T12:05:38+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -1136,29 +1090,30 @@
         },
         {
             "name": "ocramius/package-versions",
-            "version": "1.9.0",
+            "version": "1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/PackageVersions.git",
-                "reference": "94c9d42a466c57f91390cdd49c81313264f49d85"
+                "reference": "f51ff2b2b49baaa302d6bf71880e4d8b5acd7015"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/94c9d42a466c57f91390cdd49c81313264f49d85",
-                "reference": "94c9d42a466c57f91390cdd49c81313264f49d85",
+                "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/f51ff2b2b49baaa302d6bf71880e4d8b5acd7015",
+                "reference": "f51ff2b2b49baaa302d6bf71880e4d8b5acd7015",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.1.0 || ^2.0",
-                "php": "^7.4.0"
+                "composer-plugin-api": "^2.0.0",
+                "composer-runtime-api": "^2.0.0",
+                "php": "^7.4.7"
             },
             "require-dev": {
-                "composer/composer": "^1.9.3 || ^2.0@dev",
-                "doctrine/coding-standard": "^7.0.2",
+                "composer/composer": "^2.0.0@dev",
+                "doctrine/coding-standard": "^8.1.0",
                 "ext-zip": "^1.15.0",
-                "infection/infection": "^0.15.3",
-                "phpunit/phpunit": "^9.1.1",
-                "vimeo/psalm": "^3.9.3"
+                "infection/infection": "^0.16.4",
+                "phpunit/phpunit": "^9.1.5",
+                "vimeo/psalm": "^3.12.2"
             },
             "type": "composer-plugin",
             "extra": {
@@ -1185,7 +1140,7 @@
             "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)",
             "support": {
                 "issues": "https://github.com/Ocramius/PackageVersions/issues",
-                "source": "https://github.com/Ocramius/PackageVersions/tree/1.9.0"
+                "source": "https://github.com/Ocramius/PackageVersions/tree/1.11.x"
             },
             "funding": [
                 {
@@ -1197,7 +1152,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-06-22T14:15:44+00:00"
+            "time": "2020-08-21T12:16:47+00:00"
         },
         {
             "name": "phar-io/manifest",
