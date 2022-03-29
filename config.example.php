@@ -1,4 +1,4 @@
 <?php
 
-define('OSM_USER', '');
-define('OSM_PASS', '');
+const OSM_USER = '';
+const OSM_PASS = '';

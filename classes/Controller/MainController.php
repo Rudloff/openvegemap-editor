@@ -5,18 +5,17 @@
 
 namespace OpenVegeMap\Editor\Controller;
 
-use Buzz\Browser;
-use Buzz\Client\Curl;
 use Exception;
 use GuzzleHttp\Exception\ClientException;
-use Interop\Container\ContainerInterface;
-use Nominatim\Consumer;
-use Nominatim\Query;
-use Nominatim\Result\Collection;
+use GuzzleHttp\Exception\GuzzleException;
+use maxh\Nominatim\Exceptions\NominatimException;
+use maxh\Nominatim\Nominatim;
 use OpenVegeMap\Editor\OsmApi;
 use Plasticbrain\FlashMessages\FlashMessages;
+use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
+use Slim\Http\StatusCode;
 use Slim\Views\Smarty;
 
 /**
@@ -60,7 +59,7 @@ class MainController
     const VALID_TYPES = [
         'shop' => ['bakery', 'supermarket', 'convenience', 'deli', 'ice_cream', 'pasta', 'general'],
         'craft' => ['caterer', 'confectionery'],
-        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub', 'ice_cream'],
+        'amenity' => ['fast_food', 'restaurant', 'cafe', 'bar', 'pub', 'ice_cream', 'biergarten'],
     ];
 
     /**
@@ -90,15 +89,33 @@ class MainController
      * @param Response $response HTTP response
      *
      * @return Response
+     * @throws GuzzleException
      */
-    public function edit(Request $request, Response $response)
+    public function edit(Request $request, Response $response): Response
     {
         $type = $request->getAttribute('type');
 
         try {
-            $feature = $this->api->getById($type, $request->getAttribute('id'));
+            $feature = $this->api->getById($type, intval($request->getAttribute('id')));
         } catch (ClientException $e) {
-            return $response->withStatus(404)->write('This element does not exist.');
+            return $response->withStatus(StatusCode::HTTP_NOT_FOUND)->write('This element does not exist.');
+        }
+
+        $properties = ($feature->getProperties());
+        $validType = false;
+        foreach (self::VALID_TYPES as $class => $types) {
+            if (isset($properties[$class])) {
+                foreach ($types as $type) {
+                    if ($properties[$class] == $type) {
+                        $validType = true;
+                        break 2;
+                    }
+                }
+            }
+        }
+
+        if (!$validType) {
+            return $response->withStatus(StatusCode::HTTP_FORBIDDEN)->write('This type can not use diet tags.');
         }
 
         $this->view->render(
@@ -127,19 +144,20 @@ class MainController
      * @param Response $response HTTP response
      *
      * @return Response
+     * @throws GuzzleException
+     * @throws NominatimException
      */
-    public function search(Request $request, Response $response)
+    public function search(Request $request, Response $response): Response
     {
         $queryString = $request->getParam('query');
         $unfilteredResults = $results = [];
         if (isset($queryString)) {
-            $client = new Browser(new Curl());
-            $consumer = new Consumer($client, 'https://nominatim.openstreetmap.org');
-            $query = new Query();
-            $query->setQuery($queryString);
-            $unfilteredResults = $consumer->search($query);
+            $consumer = new Nominatim('https://nominatim.openstreetmap.org');
+            $query = $consumer->newSearch();
+            $query->query($queryString);
+            $unfilteredResults = $consumer->find($query);
         }
-        if ($unfilteredResults instanceof Collection) {
+        if (!empty($unfilteredResults)) {
             foreach ($unfilteredResults as $item) {
                 foreach (self::VALID_TYPES as $class => $types) {
                     if ($item['class'] == $class) {
@@ -172,13 +190,14 @@ class MainController
      * @param Response $response HTTP response
      *
      * @return Response
+     * @throws GuzzleException
      */
-    public function submit(Request $request, Response $response)
+    public function submit(Request $request, Response $response): Response
     {
         $params = $request->getParsedBody();
         if (is_array($params)) {
             try {
-                $this->api->updateNode($request->getAttribute('type'), $request->getAttribute('id'), $params);
+                $this->api->updateNode($request->getAttribute('type'), intval($request->getAttribute('id')), $params);
                 $this->msg->success('Your edit has been submitted, the map will be updated shortly.', null, true);
             } catch (Exception $e) {
                 $this->msg->error($e->getMessage(), null, true);

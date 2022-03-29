@@ -42,7 +42,7 @@ class OsmApi
      *
      * @param string $apiUrl Main OSM API URL
      */
-    public function __construct($apiUrl = 'https://api.openstreetmap.org/api/0.6/')
+    public function __construct(string $apiUrl = 'https://api.openstreetmap.org/api/0.6/')
     {
         $this->client = new Client();
         $this->apiUrl = $apiUrl;
@@ -57,7 +57,7 @@ class OsmApi
      * @return Feature OSM node
      * @throws GuzzleException
      */
-    public function getById($type, $id)
+    public function getById(string $type, int $id): Feature
     {
         $suffix = '';
         if ($type == 'way') {
@@ -105,7 +105,7 @@ class OsmApi
      * @return int Changeset ID
      * @throws GuzzleException
      */
-    private function getChangeset()
+    private function getChangeset(): int
     {
         $osm = new FluidXml('osm');
         $osm->add('changeset');
@@ -135,7 +135,7 @@ class OsmApi
      * @return void
      * @throws GuzzleException
      */
-    public function updateNode($type, $id, array $tags)
+    public function updateNode(string $type, int $id, array $tags)
     {
         $baseXml = $this->client->request(
             'GET',

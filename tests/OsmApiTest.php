@@ -6,6 +6,8 @@
 namespace OpenVegeMap\Test;
 
 use GeoJson\Feature\Feature;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\GuzzleException;
 use OpenVegeMap\Editor\OsmApi;
 use PHPUnit\Framework\TestCase;
 
@@ -24,7 +26,7 @@ class OsmApiTest extends TestCase
     /**
      * Setup properties used in multiple tests.
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->api = new OsmApi();
     }
@@ -33,12 +35,13 @@ class OsmApiTest extends TestCase
      * Test the getById() function.
      *
      * @param string $type OSM type (node or way)
-     * @param int    $id   OSM element ID
+     * @param int $id OSM element ID
      *
      * @return void
      * @dataProvider nodeProvider
+     * @throws GuzzleException
      */
-    public function testgetById($type, $id)
+    public function testgetById(string $type, int $id)
     {
         $feature = $this->api->getById($type, $id);
         $this->assertInstanceOf(Feature::class, $feature);
@@ -50,7 +53,7 @@ class OsmApiTest extends TestCase
      *
      * @return array[]
      */
-    public function nodeProvider()
+    public function nodeProvider(): array
     {
         return [
             ['node', 4165743782],
@@ -73,10 +76,12 @@ class OsmApiTest extends TestCase
      * Test the updateNode() function with a non-existing node.
      *
      * @return void
-     * @expectedException GuzzleHttp\Exception\ClientException
+     *
+     * @throws GuzzleException
      */
     public function testUpdateNodeWithWrongNode()
     {
+        $this->expectException(ClientException::class);
         $this->api->updateNode('node', 42, []);
     }
 }

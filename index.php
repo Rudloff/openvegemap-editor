@@ -6,7 +6,13 @@ use Slim\Views\Smarty as SmartyView;
 use Slim\Views\SmartyPlugins;
 
 require_once __DIR__ . '/vendor/autoload.php';
-require_once __DIR__ . '/config.php';
+
+$configPath = __DIR__ . '/config.php';
+if (file_exists($configPath)) {
+    require_once $configPath;
+} else {
+    die('config.php file does not exist.');
+}
 
 $app = new App();
 $container = $app->getContainer();
@@ -22,4 +28,9 @@ $controller = new MainController($container);
 $app->get('/{type}/{id}', [$controller, 'edit']);
 $app->get('/', [$controller, 'search']);
 $app->post('/{type}/{id}', [$controller, 'submit']);
-$app->run();
+
+try {
+    $app->run();
+} catch (Exception $e) {
+    die('Error: ' . $e->getMessage());
+}
