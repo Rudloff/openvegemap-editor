@@ -8,7 +8,7 @@
     "furtive": "^2.4.0"
   },
   "devDependencies": {
-    "grunt": "^1.5.2",
+    "grunt": "^1.5.3",
     "grunt-fixpack": "^0.2.1",
     "grunt-jslint": "^1.1.15",
     "grunt-phpcs": "^0.4.0",
