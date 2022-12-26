@@ -93,10 +93,10 @@ class MainController
      */
     public function edit(Request $request, Response $response): Response
     {
-        $type = $request->getAttribute('type');
+        $elementType = $request->getAttribute('type');
 
         try {
-            $feature = $this->api->getById($type, intval($request->getAttribute('id')));
+            $feature = $this->api->getById($elementType, intval($request->getAttribute('id')));
         } catch (ClientException $e) {
             return $response->withStatus(StatusCode::HTTP_NOT_FOUND)->write('This element does not exist.');
         }
@@ -126,7 +126,7 @@ class MainController
                 'coords' => $feature->getGeometry()->getCoordinates(),
                 'id' => $feature->getId(),
                 'msg' => $this->msg->display(null, false),
-                'type' => $type,
+                'type' => $elementType,
                 'editProperties' => [
                     'diet:vegan' => 'Vegan',
                     'diet:vegetarian' => 'Vegetarian',
