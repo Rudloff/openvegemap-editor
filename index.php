@@ -31,6 +31,6 @@ $app->post('/{type}/{id}', [$controller, 'submit']);
 
 try {
     $app->run();
-} catch (Exception $e) {
+} catch (Throwable $e) {
     die('Error: ' . $e->getMessage());
 }
